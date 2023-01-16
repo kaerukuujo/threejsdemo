@@ -5,10 +5,11 @@ import fragmentShader from './shaders/fragment.glsl';
 import atmosphereVertexShader from './shaders/atmosphereVertex.glsl';
 import atmosphereFragmentShader from './shaders/atmosphereFragment.glsl';
 
+const canvasContainer = document.querySelector('#canvasContainer');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
   75,
-  innerWidth / innerHeight,
+  canvasContainer.offsetWidth / canvasContainer.offsetHeight,
   0.1,
   1000
 );
@@ -16,10 +17,13 @@ const camera = new THREE.PerspectiveCamera(
 const renderer = new THREE.WebGLRenderer (
   {
     antialias: true,
+    canvas: document.querySelector('canvas'),
 });
-renderer.setSize(innerWidth, innerHeight);
+
+renderer.setSize(
+  canvasContainer.offsetWidth, 
+  canvasContainer.offsetHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
-document.body.appendChild(renderer.domElement);
 
 //create a sphere
 const sphere = new THREE.Mesh(
